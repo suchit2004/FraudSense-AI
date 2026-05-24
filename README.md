@@ -1,5 +1,10 @@
 # 🛡️ FraudSense AI: Real-time UPI Transaction Fraud Prevention Engine
 
+> [!NOTE]
+> **Production Status:** Production Ready & Verified.  
+> Developed for PhonePe Portfolio Vision.  
+> Implements real-time Isolation Forest models, SHAP local explanations, NetworkX cycle graph checks, and Kolmogorov-Smirnov drift MLOps.
+
 **FraudSense AI** is a production-grade, real-time UPI transaction fraud detection and explainability system designed specifically for high-scale environments like **PhonePe**. 
 
 Rather than working on static credit-card transaction CSV files with XGBoost (a solved, generic sandbox task), this project implements a **live transaction ingestion simulator** that processes data at sub-100ms latency, combines unsupervised anomaly models with graph network dynamics, tracks feature concept drift in real time, and translates ML predictions into human-readable narratives for fraud analysts.
