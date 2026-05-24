@@ -1,0 +1,26 @@
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Streamlit
+.streamlit/
+*.log
+
+# Project specific
+.gemini/
+antigravity/
+.system_generated/
+scratch/
+task.md
+implementation_plan.md
+walkthrough.md
