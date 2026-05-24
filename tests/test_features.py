@@ -38,4 +38,4 @@ if __name__ == "__main__":
     test_vpa_validations()
     test_vpa_digits_ratio()
     test_feature_extraction_shape()
-    print("✅ All Features extraction tests passed!")
+    print("[PASS] All Features extraction tests passed!")

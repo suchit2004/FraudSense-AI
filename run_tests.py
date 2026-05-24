@@ -1,8 +1,9 @@
+import os
 import subprocess
 import sys
 
 def run_tests():
-    print("🧪 Running FraudSense AI Test Suite...")
+    print("[TEST] Running FraudSense AI Test Suite...")
     print("--------------------------------------")
     
     tests = [
@@ -12,25 +13,29 @@ def run_tests():
         ["tests/test_model.py"]
     ]
     
+    # Inject project root directory into PYTHONPATH for the subprocesses
+    env = os.environ.copy()
+    project_root = os.path.abspath(os.path.dirname(__file__))
+    env["PYTHONPATH"] = project_root + os.pathsep + env.get("PYTHONPATH", "")
+    
     all_passed = True
     
     for cmd in tests:
-        # Run test script with current python interpreter
         full_cmd = [sys.executable] + cmd
-        print(f"▶️ Running {' '.join(cmd)}...")
-        res = subprocess.run(full_cmd)
+        print(f"[RUN] Running {' '.join(cmd)}...")
+        res = subprocess.run(full_cmd, env=env)
         if res.returncode != 0:
-            print(f"❌ Test failed: {' '.join(cmd)}")
+            print(f"[FAIL] Test failed: {' '.join(cmd)}")
             all_passed = False
         else:
-            print(f"✅ Passed!\n")
+            print(f"[PASS] Passed!\n")
             
     print("--------------------------------------")
     if all_passed:
-        print("🎉 ALL UNIT TESTS PASSED SUCCESSFULLY!")
+        print("[SUCCESS] ALL UNIT TESTS PASSED SUCCESSFULLY!")
         sys.exit(0)
     else:
-        print("❌ SOME UNIT TESTS FAILED. CHECK LOGS ABOVE.")
+        print("[ERROR] SOME UNIT TESTS FAILED. CHECK LOGS ABOVE.")
         sys.exit(1)
 
 if __name__ == "__main__":

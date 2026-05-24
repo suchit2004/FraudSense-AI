@@ -8,11 +8,11 @@ def run_services():
     backend_cmd = [sys.executable, "-m", "uvicorn", "backend.main:app", "--host", "127.0.0.1", "--port", "8000"]
     frontend_cmd = [sys.executable, "-m", "streamlit", "run", "frontend/app.py"]
 
-    print("🚀 Starting FraudSense AI Dual Services...")
+    print("[INFO] Starting FraudSense AI Dual Services...")
     print("----------------------------------------")
     
     # Start Backend FastAPI
-    print("🤖 Starting FastAPI Analytics Backend on port 8000...")
+    print("[BACKEND] Starting FastAPI Analytics Backend on port 8000...")
     backend_proc = subprocess.Popen(
         backend_cmd,
         stdout=subprocess.PIPE,
@@ -26,7 +26,7 @@ def run_services():
     time.sleep(3)
     
     # Start Frontend Streamlit
-    print("🖥️ Starting Streamlit UI Dashboard...")
+    print("[FRONTEND] Starting Streamlit UI Dashboard...")
     frontend_proc = subprocess.Popen(
         frontend_cmd,
         stdout=subprocess.PIPE,
@@ -38,7 +38,7 @@ def run_services():
     
     # Define cleaner for shutting down both services on interrupt
     def kill_processes():
-        print("\n🛑 Shutting down backend and frontend services...")
+        print("\n[STOP] Shutting down backend and frontend services...")
         backend_proc.terminate()
         frontend_proc.terminate()
         try:
@@ -47,7 +47,7 @@ def run_services():
         except subprocess.TimeoutExpired:
             backend_proc.kill()
             frontend_proc.kill()
-        print("✅ Services terminated. Goodbye!")
+        print("[OK] Services terminated. Goodbye!")
         sys.exit(0)
 
     # Listen to signal termination
@@ -58,9 +58,9 @@ def run_services():
     signal.signal(signal.SIGTERM, signal_handler)
 
     print("----------------------------------------")
-    print("👉 Backend API is live at http://127.0.0.1:8000")
-    print("👉 Streamlit Dashboard is opening in your browser...")
-    print("👉 Press Ctrl+C in this terminal to stop both services.")
+    print("Backend API is live at http://127.0.0.1:8000")
+    print("Streamlit Dashboard is opening in your browser...")
+    print("Press Ctrl+C in this terminal to stop both services.")
     print("----------------------------------------\n")
 
     # Monitor outputs without blocking
@@ -87,10 +87,10 @@ def run_services():
 
             # Check if any process exited unexpectedly
             if backend_proc.poll() is not None:
-                print("❌ Backend service stopped unexpectedly.")
+                print("[ERROR] Backend service stopped unexpectedly.")
                 kill_processes()
             if frontend_proc.poll() is not None:
-                print("❌ Frontend service stopped unexpectedly.")
+                print("[ERROR] Frontend service stopped unexpectedly.")
                 kill_processes()
                 
             time.sleep(0.1)
