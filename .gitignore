@@ -13,7 +13,8 @@ env/
 ENV/
 
 # Streamlit
-.streamlit/
+.streamlit/*
+!.streamlit/config.toml
 *.log
 
 # Project specific
