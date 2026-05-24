@@ -1,5 +1,6 @@
 import time
 import threading
+import numpy as np
 from collections import deque
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
 from fastapi.middleware.cors import CORSMiddleware
